@@ -18,21 +18,12 @@ WHERE id = 1
 CREATE TABLE IF NOT EXISTS clientes (
 id SERIAL PRIMARY KEY,
 nombre VARCHAR(255),
-correo VARCHAR (255)
-)
-INSERT INTO clientes (nombre, correo)
-VALUES ('ignacio','ignacio@gmail.com'),('paula','paula@gmail.com'),('monica','monica@gmail.com')
-CREATE TABLE IF NOT EXISTS pedidos (
-id SERIAL PRIMARY KEY,
-fecha_pedido DATE,
-cliente_id INT,
-producto_id INT,
-FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+correo VARCHAR (255),
+producto_id INT
 FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
-INSERT INTO pedidos (cliente_id, producto_id)
-VALUES (2,5),(1,4),(2,2),(3,5)
+INSERT INTO clientes (nombre, correo, producto_id)
+VALUES ('ignacio','ignacio@gmail.com',2),('paula','paula@gmail.com',3),('monica','monica@gmail.com',4)
 SELECT clientes.nombre, productos.nombre
-FROM pedidos
-INNER JOIN clientes ON pedidos.cliente_id = clientes.id
-INNER JOIN productos ON pedidos.producto_id = productos.id;
+FROM clientes
+INNER JOIN productos ON productos.id=clientes.producto_id;
